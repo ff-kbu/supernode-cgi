@@ -1,4 +1,8 @@
 #!/usr/bin/perl
+use strict;
+use warnings;
+use CGI;
+
 
 ####
 # This script renders batctl o as json - showing the first hop, only
@@ -12,9 +16,6 @@ my $BATCTL_COMMAND = 'sudo /usr/local/sbin/batctl o'
 ###
 
 
-use strict;
-use warnings;
-use CGI;
 
 my $q = new CGI;
 print $q->header(-type => "text/json");
