@@ -9,7 +9,7 @@ use CGI;
 # 
 ##### Configuration
 # Command for retrieving batctl o data
-my $BATCTL_COMMAND = 'sudo /usr/local/sbin/batctl o'
+my $BATCTL_COMMAND = 'sudo /usr/local/sbin/batctl o';
 
 ###
 ### End of Configuration
