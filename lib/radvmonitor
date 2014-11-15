@@ -1,0 +1,57 @@
+#!/usr/bin/perl -w
+use strict;
+use POSIX qw(strftime);
+use Fcntl qw(:flock SEEK_END);
+
+# Configuration
+my $OUTPUT_FILE = "/tmp/radvmonitor.json";
+# End Configuration
+
+my $COMMAND = $ARGV[0];
+$COMMAND or die "No command given"; 
+print "Executing $COMMAND\n";
+
+open(PIPE, "$COMMAND |");
+my($originator,$prefix,$lifetime,%ann);
+while(<PIPE>){
+	chomp;
+	if(/# based on Router Advertisement from (.+)/){
+		$originator = $1;
+	} elsif (/^\s+prefix (.+)/){
+		$prefix = $1;
+	} elsif (/AdvValidLifetime (.+);/) {
+		my $lifetime = time() + $1;
+		$ann{"$originator-$prefix"} = {originator => $originator, prefix => $prefix, lifetime => $lifetime};
+		process_routes(\%ann);
+	}
+}
+
+close PIPE;
+
+sub process_routes{
+	my $param = $_[0];
+	my %ref = %$param;
+	my $now = time();
+	my ($o,$p,$l,$c);
+	my @routes;
+	while(my ($k, $v) = each(%ref)){
+		$o = $v->{originator};
+		$p = $v->{prefix};
+		$l = $v->{lifetime};
+		if($l < $now){
+			delete $ref{$k};
+		} else {
+			my $tz = strftime("%z", localtime($l));
+			my $time = strftime("%Y-%m-%dT%H:%M:%S", localtime($l)).$tz;
+			push(@routes,"{\"originator\": \"$o\", \"prefix\": \"$p\", \"expires_at\": \"$time\"}");		
+		} 
+	}
+	my $str = "[".join(",\n",@routes)."]";
+	
+	open(OUTFILE, ">$OUTPUT_FILE") || die;
+	flock(OUTFILE, LOCK_EX) || die;
+	print OUTFILE "$str";
+	close(OUTFILE);
+		
+}
+
