@@ -10,6 +10,8 @@ cgi-lib/batdata.cgi
 -------------
 Renders batctl o as json (first hop is rendered, only)
 
+Note: The webserver (usually www-data) executes <code>'sudo /usr/local/sbin/batctl o'</code>. The command can be changed in the script's source code.
+
 lib/radvmonitor
 ---------------
 Uses radvdump to monitor used prefix.
