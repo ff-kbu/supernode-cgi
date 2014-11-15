@@ -13,7 +13,9 @@ Renders batctl o as json (first hop is rendered, only)
 lib/radvmonitor
 ---------------
 Uses radvdump to monitor used prefix.
-Prefixes are written to a json-file, configured in the scripts source code
+
+Prefixes are written to a json-file, configured in the script's source code
+
 <code>
 	 ./lib/radvmonitor /usr/sbin/radvdump
 </code>
