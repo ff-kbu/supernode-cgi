@@ -6,7 +6,8 @@ All scripts are written in perl and must be deployed to the cgi-bin directory.
 
 Dependencies
 --------------
-* <code>Config::Simple;</code> (Debian package: libconfig-simple-perl)
+* <code>Config::Simple</code> (Debian package: libconfig-simple-perl)
+* <code>LWP</code> (Debian package: libwww-perl)
 
 Configuration
 ----------------
