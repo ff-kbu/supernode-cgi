@@ -45,6 +45,10 @@ sub process_key_upload{
 	}
 
 	# Check if key exists - if, yes - return
+	my $path = $config{'fastd_peer_dir'}."/$subm{NODE_ID}_$subm{KEY}";
+	if(-f $path){
+		return 200;
+	}
 
 
 	# Submit key to register, evaluate request
@@ -52,10 +56,6 @@ sub process_key_upload{
 	my $req = HTTP::Request->new(POST => $config{'fastd_keyupload_url'});
 	$req->content('{ "mac": "'.$subm{NODE_ID}.'", "key": "'.$subm{KEY}.'" }');
 
-	my $path = $config{'fastd_peer_dir'}."/$subm{NODE_ID}_$subm{KEY}";
-	if(-f $path){
-		return 200;
-	}
 
 	my $resp = $ua->request($req);
 	if($ua->request($req) == 423){
