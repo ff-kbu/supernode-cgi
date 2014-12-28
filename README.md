@@ -6,13 +6,14 @@ All scripts are written in perl and must be deployed to the cgi-bin directory.
 
 Dependencies
 --------------
-* <code>Config::Simple;</code> for configuration (Debian package: libconfig-simple-perl)
+* <code>Config::Simple;</code> (Debian package: libconfig-simple-perl)
 
 Configuration
 ----------------
-A template is provided. To use it:
+A template is provided. Use it:
+
+
 <code>cp etc/config.template etc/config</code>
- 
 
 
 cgi-lib/batdata.cgi
