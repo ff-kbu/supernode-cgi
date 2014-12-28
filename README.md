@@ -14,7 +14,9 @@ Configuration
 A template is provided. Use it:
 
 
-<code>mkdir -p /usr/local/etc/supernode-cgi/ && cp etc/config.template /usr/local/etc/supernode-cgi/config</code>
+<code>mkdir -p /usr/local/etc/supernode-cgi/</code>
+
+<code>cp etc/config.template /usr/local/etc/supernode-cgi/config</code>
 
 And adjust the different stanzas according to your needs.
 
