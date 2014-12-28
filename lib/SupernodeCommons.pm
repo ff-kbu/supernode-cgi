@@ -7,9 +7,13 @@ sub get_config{
 	Config::Simple->import_from("../etc/config", \%config) 
 	or die "Unable to open etc/config. Error: $!\n";
 	
-	$config{'BATCTL'} or die "BATCTL (batctl command path) is not definied in etc/config. \n";	
+	$config{'batctl_command'} or die "batctl_command (the batctl command path to be executed) is not definied in etc/config. \n";	
 
 	return %config;
+}
+
+sub process_key_upload{
+	my ($node, $key, $firmware)
 }
 
 1;

@@ -15,12 +15,12 @@ A template is provided. Use it:
 
 <code>cp etc/config.template etc/config</code>
 
-and adjust the different settings to your needs.
+And adjust the different stanzas according to your needs.
 
 
 cgi-lib/batdata.cgi
 -------------
-Renders batctl o as json (first hop is rendered, only)
+Renders <code>batctl o</code> as json (first hop is rendered, only)
 
 
 lib/radvmonitor

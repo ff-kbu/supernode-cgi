@@ -10,7 +10,7 @@ my $q = new CGI;
 my(%conf);
 %conf = SupernodeCommons::get_config();
 
-open(PIPE, $conf{'BATCTL'}." o |");
+open(PIPE, $conf{'batctl_command'}." o |");
 my @data = <PIPE>;
 close PIPE;
 my @result; 
