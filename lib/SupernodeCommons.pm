@@ -3,7 +3,7 @@ use strict;
 use Config::Simple;
 use LWP::UserAgent;
 
-my $DEFAULT_CONFIG_PATH="/usr/local/etc/supernode-cgi/config";
+my $DEFAULT_CONFIG_PATH="/etc/supernode-cgi/config";
 
 sub get_config{
 	my(%config);
