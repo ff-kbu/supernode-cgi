@@ -26,7 +26,7 @@ cgi-lib/batdata.cgi
 Renders <code>batctl o</code> as json (first hop is rendered, only)
 
 
-lib/radvmonitor
+bin/radvmonitor
 ---------------
 Uses radvdump to monitor used prefix.
 
