@@ -15,6 +15,8 @@ A template is provided. Use it:
 
 <code>cp etc/config.template etc/config</code>
 
+and djust the different settings to your needs.
+
 
 cgi-lib/batdata.cgi
 -------------
