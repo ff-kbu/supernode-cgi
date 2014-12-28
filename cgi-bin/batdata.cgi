@@ -2,38 +2,15 @@
 use strict;
 use warnings;
 use CGI;
+use lib '../lib';
+use SupernodeCommons;
 
-
-####
-# This script renders batctl o as json - showing the first hop, only
-# 
-##### Configuration
-# Command for retrieving batctl o data
-my $CONFIG_FILE = '/usr/local/etc/supernode-cgi.conf';
-###
-### End of Configuration
-
-
-my $BATCTL_COMMAND="";
-
-# Read config
-open(CONF, "$CONFIG_FILE") or die "Unable to open $CONFIG_FILE - $!";
-while(<CONF>){
-	chomp();
-	/batctl_cmd=(.+)/;
-	if($_ && !$1){
-		die("Unable to parse config - unknown parameter $_");
-	}
-	if($_){
-		$BATCTL_COMMAND = $1;
-	}
-}
-if (!$BATCTL_COMMAND){
-	die "batctl_cmd not diven in config file \n";
-}
 
 my $q = new CGI;
-open(PIPE, "$BATCTL_COMMAND o |");
+my(%conf);
+%conf = SupernodeCommons::get_config();
+
+open(PIPE, $conf{'BATCTL'}." o |");
 my @data = <PIPE>;
 close PIPE;
 my @result; 
