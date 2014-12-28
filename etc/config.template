@@ -1,6 +1,6 @@
 # Template configuration
 # For production use: cp config.template config
 
-BATCTL sudo batctl
+BATCTL sudo batctl # Batctl command. Executed by www-data
 
 
