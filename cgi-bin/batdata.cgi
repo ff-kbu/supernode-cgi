@@ -9,7 +9,7 @@ use CGI;
 # 
 ##### Configuration
 # Command for retrieving batctl o data
-my $CONFIG_FILE = '/usr/local/etc/supernode-cgi.conf';
+my $CONFIG_FILE = '/usr/local/supernode-cgi/etc/supernode-cgi.conf';
 ###
 ### End of Configuration
 
