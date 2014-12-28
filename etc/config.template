@@ -1,6 +1,9 @@
 # Template configuration
 # For production use: cp config.template config
 
-batctl_command	sudo batctl # Batctl command. Executed by www-data
-fastd_reload_kommand sudo killall -1 fastd # Reload all fastd-keys
+#Batctl command. Executed by www-data
+batctl_command			'sudo batctl'
+
+#Reload all fastd-keys 				
+fastd_reload_command 	'sudo killall -1 fastd' 	
 

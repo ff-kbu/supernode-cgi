@@ -8,6 +8,8 @@ sub get_config{
 	or die "Unable to open etc/config. Error: $!\n";
 	
 	$config{'batctl_command'} or die "batctl_command (the batctl command path to be executed) is not definied in etc/config. \n";	
+	$config{'fastd_reload_command'} or die "fastd_reload_command (the fastd key command path to be executed) is not definied in etc/config. \n";
+ 
 
 	return %config;
 }
