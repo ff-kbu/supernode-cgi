@@ -20,7 +20,6 @@ cgi-lib/batdata.cgi
 -------------
 Renders batctl o as json (first hop is rendered, only)
 
-Note: The webserver (usually www-data) executes <
 
 lib/radvmonitor
 ---------------
