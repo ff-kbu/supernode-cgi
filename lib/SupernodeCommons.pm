@@ -8,7 +8,7 @@ my $DEFAULT_CONFIG_PATH="/etc/supernode-cgi/config";
 sub get_config{
 	my(%config);
 	Config::Simple->import_from($DEFAULT_CONFIG_PATH, \%config) 
-	or die "Unable to open $DEFAULT_CONFIG_PATH. Error: $!\n";
+	or die "Unable to open $DEFAULT_CONFIG_PATH - $!\n";
 	
 	$config{'batctl_command'} or die "batctl_command is not definied in $DEFAULT_CONFIG_PATH. \n";	
 	$config{'fastd_reload_command'} or die "fastd_reload_command is not definied in $DEFAULT_CONFIG_PATH. \n";
@@ -66,6 +66,7 @@ sub process_key_upload{
 	
 	# Write key to file
 	open(OUTFILE, ">$path") or die "Unable to open $path - $!\n";
+	flock(OUTFILE,2);
 	print OUTFILE "key \"$subm{KEY}\";";
 	close OUTFILE;
 
