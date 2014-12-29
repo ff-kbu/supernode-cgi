@@ -18,3 +18,13 @@ my %params = (
 );
 
 my $ret_c = SupernodeCommons::process_key(\%params);
+
+
+if($ret_c){
+	$q->$header->status('406 Not Acceptable');
+}
+
+print $q->header('text/plain');
+print ($ret_c || "Ok");
+
+1;

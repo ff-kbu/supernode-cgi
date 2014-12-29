@@ -20,7 +20,7 @@ sub test_regular_submit{
 	);	
 
 	my $ret_c = SupernodeCommons::process_key_upload(\%params);
-	is($ret_c, 200, "Return code for regular opload");
+	is($ret_c, 0, "Return code for regular opload");
 }
 
 sub test_missing_node_id{
@@ -30,7 +30,7 @@ sub test_missing_node_id{
 	);	
 
 	my $ret_c = SupernodeCommons::process_key_upload(\%params);
-	is($ret_c, 400, "Return code missing node-id");
+	is($ret_c, "No parameter NODE_ID provided", "Return code missing node-id");
 }
 
 sub test_malformed_node_id{
@@ -41,7 +41,7 @@ sub test_malformed_node_id{
 	);	
 
 	my $ret_c = SupernodeCommons::process_key_upload(\%params);
-	is($ret_c, 400, "Test for malformed node-id");
+	is($ret_c, "malformed node-id X41731fa56bc", "Test for malformed node-id");
 }
 
 sub test_missing_key{
@@ -51,7 +51,7 @@ sub test_missing_key{
 	);	
 
 	my $ret_c = SupernodeCommons::process_key_upload(\%params);
-	is($ret_c, 400, "Test for mssing key");
+	is($ret_c, "No parameter KEY provided", "Test for missing key");
 }
 
 sub test_malformed_key{
@@ -62,5 +62,5 @@ sub test_malformed_key{
 	);	
 
 	my $ret_c = SupernodeCommons::process_key_upload(\%params);
-	is($ret_c, 400, "Test for mssing key");
+	is($ret_c, "malformed key Xed47682ab71e0c12adec062ff5fd2c0f32c4dcb95c5f49dba938170ce8952f7", "Test for malformed key");
 }

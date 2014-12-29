@@ -27,27 +27,27 @@ sub process_key_upload{
 	# Parameter checks
 	if(!$subm{NODE_ID}){
 		print STDERR "No parameter NODE_ID provided\n";
-		return 400;
+		return "No parameter NODE_ID provided";
 	}
 	if($subm{NODE_ID} !~ /^[0-9a-f]{12}$/){
 		print STDERR "malformed node-id $subm{NODE_ID}\n";
-		return 400;
+		return "malformed node-id $subm{NODE_ID}";
 	}
 	
 	if(!$subm{KEY}){
 		print STDERR "No parameter KEY provided\n";
-		return 400;
+		return "No parameter KEY provided";
 	}
 	
 	if($subm{KEY} !~ /^[0-9a-f]{64}$/){
 		print STDERR "malformed key $subm{KEY}\n";
-		return 400;
+		return "malformed key $subm{KEY}";
 	}
 
 	# Check if key exists - if, yes - return
 	my $path = $config{'fastd_peer_dir'}."/$subm{NODE_ID}_$subm{KEY}";
 	if(-f $path){
-		return 200;
+		return 0;
 	}
 
 
@@ -60,7 +60,7 @@ sub process_key_upload{
 	my $resp = $ua->request($req);
 	if($ua->request($req) == 423){
 		print STDERR "Upload denied by policy\n";
-		return 423;
+		return "Upload denied by policy";
 			
 	}
 	
@@ -73,7 +73,7 @@ sub process_key_upload{
 	# Execute reload command
 	system($config{'fastd_reload_key_cmd'}) or die "Unable to execute fastd reload-command";
 
-	return 200;
+	return 0;
 
 }
 
