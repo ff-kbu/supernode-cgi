@@ -17,13 +17,13 @@ done_testing();
 
 sub test_regular_submit{
 	my %params = (
-		NODE_ID => "a41731fa56bc",
+		NODE_ID => "a71731fa86bc",
     	KEY => "fed47682ab71e0c12adec062ff5fd2c0f32c4dcb95c5f49dba938170ce8952f7",
     	FW_VERSION => "unit-test"
 	);	
 
 	my $ret_c = SupernodeCommons::process_key_upload(\%params);
-	is($ret_c, 0, "Return code for regular opload");
+	is($ret_c, 0, "Return code for regular upload");
 }
 
 sub test_missing_node_id{

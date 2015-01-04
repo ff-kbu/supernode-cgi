@@ -2,6 +2,7 @@ package SupernodeCommons;
 use strict;
 use Config::Simple;
 use LWP::UserAgent;
+use Fcntl qw(:flock SEEK_END);
 
 my $DEFAULT_CONFIG_PATH="/etc/supernode-cgi/config";
 
@@ -58,6 +59,7 @@ sub process_key_upload{
 	# Submit key to register, evaluate request
 	my $ua = LWP::UserAgent->new;
 	my $req = HTTP::Request->new(POST => $config{'fastd_keyupload_url'});
+
 	$req->content('{ "mac": "'.$subm{NODE_ID}.'", "key": "'.$subm{KEY}.'" }');
 
 
@@ -70,13 +72,29 @@ sub process_key_upload{
 	
 	# Write key to file
 	open(OUTFILE, ">$path") or die "Unable to open $path - $!\n";
-	flock(OUTFILE,2);
+	flock(OUTFILE, LOCK_EX);
 	print OUTFILE "key \"$subm{KEY}\";";
 	close OUTFILE;
 
 	# Execute reload command
-	system($config{'fastd_reload_key_cmd'}) or die "Unable to execute fastd reload-command";
+	# Rate limiting reload-command calls - one reload every 2 secs
 
+	my $current_time = time();
+	# Sleep for 2 seconds.
+	printf "Slept for ".sleep(2)." seconds \n";	
+	
+	# Figure out, if fastd was reloaded in the meantime
+	open(LAST_RUN, "+<../run/last_fastd_reload") or die "Unable to open ../run/last_fastd_reload - $!\n";
+	flock(LAST_RUN,LOCK_EX);
+	my $last_run = int(<LAST_RUN>);
+	# Fastd was not reloaded in the meantime
+	if($last_run < $current_time){
+		seek(LAST_RUN, 0, 0); 
+ 		truncate(LAST_RUN, tell LAST_RUN);
+		print LAST_RUN time();
+		system($config{'fastd_reload_key_cmd'}) or die "Unable to execute fastd reload-command";
+	}
+	close LAST_RUN;
 	return 0;
 
 }

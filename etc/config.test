@@ -1,0 +1,19 @@
+# Configuration file - Test environment
+
+# Template configuration
+# For production use: cp config.template config
+
+# Batctl command. Executed by www-data
+batctl_command			'cat ../test/batctl_o.txt'
+
+# Reload all fastd-keys 				
+fastd_reload_command 	'sudo killall -1 fastd' 	
+
+# URL to upload keys to - check for allowance
+fastd_keyupload_url		'http://register.kbu.freifunk.net/fastds'
+
+# Peer repository
+fastd_peer_dir			'/etc/fastd/mesh-vpn/peers'
+
+#Reload peer definitions
+fastd_reload_key_cmd	'sudo killall -1 fastd'
