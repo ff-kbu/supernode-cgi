@@ -11,14 +11,14 @@ Dependencies
 
 Configuration
 ----------------
-A template is provided. Use it:
+A template is provided. And adjust the different stanzas according to your needs:
 
 
 <code>mkdir -p /etc/supernode-cgi/</code>
 
-<code>cp etc/config.template /usr/local/etc/supernode-cgi/config</code>
+<code>cp ./supernode-cgi/etc/config.template /etc/supernode-cgi/config</code>
 
-And adjust the different stanzas according to your needs.
+Assuming, that the git-repo is cloned to ./supernode-cgi.
 
 
 cgi-lib/batdata.cgi
