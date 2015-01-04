@@ -4,9 +4,6 @@
 # Batctl command. Executed by www-data
 batctl_command			'sudo batctl'
 
-# Reload all fastd-keys 				
-fastd_reload_command 	'sudo killall -1 fastd' 	
-
 # URL to upload keys to - check for allowance
 fastd_keyupload_url		'http://register.kbu.freifunk.net/fastds'
 

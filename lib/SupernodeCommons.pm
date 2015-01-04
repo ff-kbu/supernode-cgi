@@ -16,7 +16,6 @@ sub get_config{
 	or die "Unable to open $DEFAULT_CONFIG_PATH - $!\n";
 	
 	$config{'batctl_command'} or die "batctl_command is not definied in $DEFAULT_CONFIG_PATH. \n";	
-	$config{'fastd_reload_command'} or die "fastd_reload_command is not definied in $DEFAULT_CONFIG_PATH. \n";
 	$config{'fastd_keyupload_url'} or die "fastd_keyupload_url is not definied in $DEFAULT_CONFIG_PATH. \n";
 	$config{'fastd_peer_dir'} or die "fastd_peer_dir is not definied in $DEFAULT_CONFIG_PATH. \n";
    	$config{'fastd_reload_key_cmd'} or die "fastd_reload_key_cmd is not definied in $DEFAULT_CONFIG_PATH. \n";
