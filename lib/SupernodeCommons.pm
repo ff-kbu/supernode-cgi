@@ -5,6 +5,11 @@ use LWP::UserAgent;
 
 my $DEFAULT_CONFIG_PATH="/etc/supernode-cgi/config";
 
+sub set_config{
+	$DEFAULT_CONFIG_PATH = $_[0];
+
+}
+
 sub get_config{
 	my(%config);
 	Config::Simple->import_from($DEFAULT_CONFIG_PATH, \%config) 

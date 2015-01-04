@@ -4,12 +4,15 @@ use Test::More;
 use lib '../lib';
 use SupernodeCommons;
 
+SupernodeCommons::set_config("../etc/config.test");
+
 test_regular_submit();
 test_missing_node_id();
 test_malformed_node_id();
 test_missing_key();
 test_malformed_key();
 done_testing();
+
 
 
 sub test_regular_submit{
